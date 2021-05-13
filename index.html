@@ -12,7 +12,9 @@
   <body>
     <script src="js/three.js"></script>
     <script>
+      // Create the main scene
       const scene = new THREE.Scene();
+      // Choose the camera and aspect ratio and "render ratio"
       const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -21,17 +23,21 @@
       );
 
       const renderer = new THREE.WebGLRenderer();
+      // The renderer will cover the entire screen
       renderer.setSize(window.innerWidth, window.innerHeight);
 
+      document.body.appendChild(renderer.domElement);
+
+      // Create the box
       const geometry = new THREE.BoxGeometry();
       const material = new THREE.MeshBasicMaterial({ color: 0x32a88b });
       const cube = new THREE.Mesh(geometry, material);
       scene.add(cube);
 
+      // Moving the camera after adding the box to see it properly
       camera.position.z = 5;
 
-      document.body.appendChild(renderer.domElement);
-
+      // The animate loop runs about 60 times per second
       function animate() {
         requestAnimationFrame(animate);
         cube.rotation.x += 0.01;
